@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -30,6 +31,7 @@ interface Product {
 
 const Products: React.FC = () => {
   const { user } = useAuth();
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
 
@@ -125,6 +127,34 @@ const Products: React.FC = () => {
     }
   };
 
+  const getStatusText = (status: string) => {
+    switch (status) {
+      case 'in-stock':
+        return t('products.inStock');
+      case 'low-stock':
+        return t('products.lowStock');
+      case 'out-of-stock':
+        return t('products.outOfStock');
+      default:
+        return status;
+    }
+  };
+
+  const getCategoryText = (category: string) => {
+    switch (category.toLowerCase()) {
+      case 'grains':
+        return t('products.grains');
+      case 'metals':
+        return t('products.metals');
+      case 'energy':
+        return t('products.energy');
+      case 'livestock':
+        return t('products.livestock');
+      default:
+        return category;
+    }
+  };
+
   const canModifyProducts = user?.role === 'manager' || user?.role === 'storekeeper';
 
   return (
@@ -132,16 +162,16 @@ const Products: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Products</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('products.title')}</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2">
-            Manage your commodity inventory and pricing
+            {t('products.subtitle')}
           </p>
         </div>
         
         {canModifyProducts && (
           <Button className="bg-blue-600 hover:bg-blue-700">
             <Plus className="h-4 w-4 mr-2" />
-            Add Product
+            {t('products.addProduct')}
           </Button>
         )}
       </div>
@@ -155,7 +185,7 @@ const Products: React.FC = () => {
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <Input
-                  placeholder="Search products..."
+                  placeholder={t('products.searchProducts')}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10"
@@ -173,7 +203,7 @@ const Products: React.FC = () => {
                   onClick={() => setSelectedCategory(category)}
                   className="capitalize"
                 >
-                  {category}
+                  {category === 'all' ? t('products.all') : getCategoryText(category)}
                 </Button>
               ))}
             </div>
@@ -193,11 +223,11 @@ const Products: React.FC = () => {
                   </div>
                   <div>
                     <CardTitle className="text-lg text-gray-900 dark:text-white">{product.name}</CardTitle>
-                    <CardDescription>{product.category}</CardDescription>
+                    <CardDescription>{getCategoryText(product.category)}</CardDescription>
                   </div>
                 </div>
                 <Badge className={getStatusColor(product.status)}>
-                  {product.status.replace('-', ' ')}
+                  {getStatusText(product.status)}
                 </Badge>
               </div>
             </CardHeader>
@@ -207,13 +237,13 @@ const Products: React.FC = () => {
                 {/* Quantity and Price */}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Quantity</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">{t('products.quantity')}</p>
                     <p className="text-lg font-semibold text-gray-900 dark:text-white">
                       {product.quantity.toLocaleString()} {product.unit}
                     </p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Price</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">{t('products.price')}</p>
                     <p className="text-lg font-semibold text-gray-900 dark:text-white">
                       ${product.price.toLocaleString()}
                     </p>
@@ -222,7 +252,7 @@ const Products: React.FC = () => {
 
                 {/* Price Change */}
                 <div className="flex items-center space-x-2">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">Price change:</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-400">{t('products.priceChange')}</span>
                   <span className={`flex items-center text-sm ${
                     product.change > 0 
                       ? 'text-green-600 dark:text-green-400' 
@@ -240,7 +270,7 @@ const Products: React.FC = () => {
                 {/* Last Updated */}
                 <div>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    Last updated: {new Date(product.lastUpdated).toLocaleDateString()}
+                    {t('products.lastUpdated')} {new Date(product.lastUpdated).toLocaleDateString()}
                   </p>
                 </div>
 
@@ -249,7 +279,7 @@ const Products: React.FC = () => {
                   <div className="flex space-x-2 pt-2">
                     <Button variant="outline" size="sm" className="flex-1">
                       <Edit className="h-3 w-3 mr-1" />
-                      Edit
+                      {t('common.edit')}
                     </Button>
                     <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700">
                       <Trash2 className="h-3 w-3" />
@@ -267,9 +297,9 @@ const Products: React.FC = () => {
         <Card className="bg-white dark:bg-gray-800 shadow-sm">
           <CardContent className="py-12 text-center">
             <Package className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No products found</h3>
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('products.noProductsFound')}</h3>
             <p className="text-gray-600 dark:text-gray-400">
-              Try adjusting your search or filter criteria
+              {t('products.noProductsMessage')}
             </p>
           </CardContent>
         </Card>

@@ -1,5 +1,5 @@
-
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { 
   BarChart, 
@@ -25,6 +25,8 @@ import {
 } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
+  const { t } = useTranslation();
+  
   // Mock data for charts
   const monthlyRevenue = [
     { month: 'Jan', revenue: 45000, profit: 12000 },
@@ -90,9 +92,9 @@ const Dashboard: React.FC = () => {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('dashboard.title')}</h1>
         <p className="text-gray-600 dark:text-gray-400 mt-2">
-          Welcome back! Here's what's happening with your commodities business.
+          {t('dashboard.subtitle')}
         </p>
       </div>
 
