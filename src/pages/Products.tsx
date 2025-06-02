@@ -1,10 +1,18 @@
-
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { 
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { 
   Plus, 
   Search, 
@@ -13,7 +21,9 @@ import {
   Trash2, 
   Package,
   TrendingUp,
-  TrendingDown
+  TrendingDown,
+  LayoutGrid,
+  LayoutList
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -34,6 +44,7 @@ const Products: React.FC = () => {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [viewMode, setViewMode] = useState<'card' | 'table'>('card');
 
   // Mock products data
   const [products] = useState<Product[]>([
@@ -168,12 +179,24 @@ const Products: React.FC = () => {
           </p>
         </div>
         
-        {canModifyProducts && (
-          <Button className="bg-blue-600 hover:bg-blue-700">
-            <Plus className="h-4 w-4 mr-2" />
-            {t('products.addProduct')}
-          </Button>
-        )}
+        <div className="flex items-center gap-3">
+          {/* View Mode Toggle */}
+          <ToggleGroup type="single" value={viewMode} onValueChange={(value) => value && setViewMode(value as 'card' | 'table')}>
+            <ToggleGroupItem value="card" aria-label="Card view">
+              <LayoutGrid className="h-4 w-4" />
+            </ToggleGroupItem>
+            <ToggleGroupItem value="table" aria-label="Table view">
+              <LayoutList className="h-4 w-4" />
+            </ToggleGroupItem>
+          </ToggleGroup>
+
+          {canModifyProducts && (
+            <Button className="bg-blue-600 hover:bg-blue-700">
+              <Plus className="h-4 w-4 mr-2" />
+              {t('products.addProduct')}
+            </Button>
+          )}
+        </div>
       </div>
 
       {/* Filters */}
@@ -211,86 +234,170 @@ const Products: React.FC = () => {
         </CardContent>
       </Card>
 
-      {/* Products Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredProducts.map((product) => (
-          <Card key={product.id} className="bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition-shadow">
-            <CardHeader className="pb-4">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
-                    <Package className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+      {/* Products Content */}
+      {viewMode === 'card' ? (
+        /* Card View */
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredProducts.map((product) => (
+            <Card key={product.id} className="bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition-shadow">
+              <CardHeader className="pb-4">
+                <div className="flex items-start justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+                      <Package className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-lg text-gray-900 dark:text-white">{product.name}</CardTitle>
+                      <CardDescription>{getCategoryText(product.category)}</CardDescription>
+                    </div>
                   </div>
-                  <div>
-                    <CardTitle className="text-lg text-gray-900 dark:text-white">{product.name}</CardTitle>
-                    <CardDescription>{getCategoryText(product.category)}</CardDescription>
-                  </div>
+                  <Badge className={getStatusColor(product.status)}>
+                    {getStatusText(product.status)}
+                  </Badge>
                 </div>
-                <Badge className={getStatusColor(product.status)}>
-                  {getStatusText(product.status)}
-                </Badge>
-              </div>
-            </CardHeader>
-            
-            <CardContent className="pt-0">
-              <div className="space-y-4">
-                {/* Quantity and Price */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">{t('products.quantity')}</p>
-                    <p className="text-lg font-semibold text-gray-900 dark:text-white">
-                      {product.quantity.toLocaleString()} {product.unit}
-                    </p>
+              </CardHeader>
+              
+              <CardContent className="pt-0">
+                <div className="space-y-4">
+                  {/* Quantity and Price */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{t('products.quantity')}</p>
+                      <p className="text-lg font-semibold text-gray-900 dark:text-white">
+                        {product.quantity.toLocaleString()} {product.unit}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{t('products.price')}</p>
+                      <p className="text-lg font-semibold text-gray-900 dark:text-white">
+                        ${product.price.toLocaleString()}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">{t('products.price')}</p>
-                    <p className="text-lg font-semibold text-gray-900 dark:text-white">
-                      ${product.price.toLocaleString()}
-                    </p>
-                  </div>
-                </div>
 
-                {/* Price Change */}
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">{t('products.priceChange')}</span>
-                  <span className={`flex items-center text-sm ${
-                    product.change > 0 
-                      ? 'text-green-600 dark:text-green-400' 
-                      : 'text-red-600 dark:text-red-400'
-                  }`}>
-                    {product.change > 0 ? (
-                      <TrendingUp className="h-3 w-3 mr-1" />
-                    ) : (
-                      <TrendingDown className="h-3 w-3 mr-1" />
+                  {/* Price Change */}
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm text-gray-600 dark:text-gray-400">{t('products.priceChange')}</span>
+                    <span className={`flex items-center text-sm ${
+                      product.change > 0 
+                        ? 'text-green-600 dark:text-green-400' 
+                        : 'text-red-600 dark:text-red-400'
+                    }`}>
+                      {product.change > 0 ? (
+                        <TrendingUp className="h-3 w-3 mr-1" />
+                      ) : (
+                        <TrendingDown className="h-3 w-3 mr-1" />
+                      )}
+                      {Math.abs(product.change)}%
+                    </span>
+                  </div>
+
+                  {/* Last Updated */}
+                  <div>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      {t('products.lastUpdated')} {new Date(product.lastUpdated).toLocaleDateString()}
+                    </p>
+                  </div>
+
+                  {/* Actions */}
+                  {canModifyProducts && (
+                    <div className="flex space-x-2 pt-2">
+                      <Button variant="outline" size="sm" className="flex-1">
+                        <Edit className="h-3 w-3 mr-1" />
+                        {t('common.edit')}
+                      </Button>
+                      <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700">
+                        <Trash2 className="h-3 w-3" />
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        /* Table View */
+        <Card className="bg-white dark:bg-gray-800 shadow-sm">
+          <CardContent className="p-0">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>{t('products.title')}</TableHead>
+                  <TableHead>{t('products.grains')}</TableHead>
+                  <TableHead>{t('products.quantity')}</TableHead>
+                  <TableHead>{t('products.price')}</TableHead>
+                  <TableHead>{t('products.priceChange')}</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>{t('products.lastUpdated')}</TableHead>
+                  {canModifyProducts && <TableHead>Actions</TableHead>}
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredProducts.map((product) => (
+                  <TableRow key={product.id}>
+                    <TableCell>
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+                          <Package className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                        </div>
+                        <div>
+                          <div className="font-medium text-gray-900 dark:text-white">{product.name}</div>
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <span className="text-gray-600 dark:text-gray-400">{getCategoryText(product.category)}</span>
+                    </TableCell>
+                    <TableCell>
+                      <span className="font-medium">{product.quantity.toLocaleString()} {product.unit}</span>
+                    </TableCell>
+                    <TableCell>
+                      <span className="font-medium">${product.price.toLocaleString()}</span>
+                    </TableCell>
+                    <TableCell>
+                      <span className={`flex items-center text-sm ${
+                        product.change > 0 
+                          ? 'text-green-600 dark:text-green-400' 
+                          : 'text-red-600 dark:text-red-400'
+                      }`}>
+                        {product.change > 0 ? (
+                          <TrendingUp className="h-3 w-3 mr-1" />
+                        ) : (
+                          <TrendingDown className="h-3 w-3 mr-1" />
+                        )}
+                        {Math.abs(product.change)}%
+                      </span>
+                    </TableCell>
+                    <TableCell>
+                      <Badge className={getStatusColor(product.status)}>
+                        {getStatusText(product.status)}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">
+                        {new Date(product.lastUpdated).toLocaleDateString()}
+                      </span>
+                    </TableCell>
+                    {canModifyProducts && (
+                      <TableCell>
+                        <div className="flex space-x-2">
+                          <Button variant="outline" size="sm">
+                            <Edit className="h-3 w-3" />
+                          </Button>
+                          <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700">
+                            <Trash2 className="h-3 w-3" />
+                          </Button>
+                        </div>
+                      </TableCell>
                     )}
-                    {Math.abs(product.change)}%
-                  </span>
-                </div>
-
-                {/* Last Updated */}
-                <div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {t('products.lastUpdated')} {new Date(product.lastUpdated).toLocaleDateString()}
-                  </p>
-                </div>
-
-                {/* Actions */}
-                {canModifyProducts && (
-                  <div className="flex space-x-2 pt-2">
-                    <Button variant="outline" size="sm" className="flex-1">
-                      <Edit className="h-3 w-3 mr-1" />
-                      {t('common.edit')}
-                    </Button>
-                    <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700">
-                      <Trash2 className="h-3 w-3" />
-                    </Button>
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      )}
 
       {/* No Results */}
       {filteredProducts.length === 0 && (
