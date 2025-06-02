@@ -1,0 +1,81 @@
+
+{
+  "common": {
+    "loading": "लोड हो रहा है...",
+    "error": "त्रुटि",
+    "success": "सफलता",
+    "cancel": "रद्द करें",
+    "save": "सेव करें",
+    "edit": "संपादित करें",
+    "delete": "हटाएं",
+    "add": "जोड़ें",
+    "search": "खोजें",
+    "filter": "फिल्टर",
+    "goBack": "वापस जाएं",
+    "logout": "लॉगआउट",
+    "light": "लाइट",
+    "dark": "डार्क"
+  },
+  "auth": {
+    "login": "साइन इन",
+    "email": "ईमेल",
+    "password": "पासवर्ड",
+    "loginTitle": "स्लूज़ कमोडिटीज़",
+    "loginSubtitle": "जारी रखने के लिए अपने खाते में साइन इन करें",
+    "signingIn": "साइन इन हो रहा है...",
+    "welcomeBack": "वापसी पर स्वागत है!",
+    "loginSuccess": "आपने सफलतापूर्वक लॉग इन किया है।",
+    "invalidCredentials": "अमान्य ईमेल या पासवर्ड। कृपया फिर से कोशिश करें।",
+    "loginError": "लॉगिन के दौरान त्रुटि हुई। कृपया फिर से कोशिश करें।",
+    "demoCredentials": "डेमो क्रेडेंशियल:",
+    "manager": "मैनेजर: manager@slooze.com",
+    "storekeeper": "स्टोर कीपर: keeper@slooze.com",
+    "demoPassword": "पासवर्ड: password123"
+  },
+  "navigation": {
+    "dashboard": "डैशबोर्ड",
+    "products": "उत्पाद",
+    "application": "एप्लिकेशन"
+  },
+  "dashboard": {
+    "title": "डैशबोर्ड",
+    "subtitle": "आपके कमोडिटी मैनेजमेंट सिस्टम का अवलोकन"
+  },
+  "products": {
+    "title": "उत्पाद",
+    "subtitle": "अपनी कमोडिटी इन्वेंट्री और मूल्य निर्धारण प्रबंधित करें",
+    "addProduct": "उत्पाद जोड़ें",
+    "searchProducts": "उत्पाद खोजें...",
+    "all": "सभी",
+    "grains": "अनाज",
+    "metals": "धातु",
+    "energy": "ऊर्जा",
+    "livestock": "पशुधन",
+    "quantity": "मात्रा",
+    "price": "मूल्य",
+    "priceChange": "मूल्य परिवर्तन:",
+    "lastUpdated": "अंतिम अपडेट:",
+    "inStock": "स्टॉक में",
+    "lowStock": "कम स्टॉक",
+    "outOfStock": "स्टॉक नहीं",
+    "noProductsFound": "कोई उत्पाद नहीं मिला",
+    "noProductsMessage": "अपने खोज या फिल्टर मानदंड को समायोजित करने का प्रयास करें"
+  },
+  "unauthorized": {
+    "title": "पहुंच अस्वीकृत",
+    "message": "आपको इस पृष्ठ तक पहुंचने की अनुमति नहीं है। यदि आपको लगता है कि यह एक त्रुटि है तो कृपया अपने व्यवस्थापक से संपर्क करें।"
+  },
+  "notFound": {
+    "title": "पृष्ठ नहीं मिला",
+    "message": "आप जिस पृष्ठ की तलाश कर रहे हैं वह मौजूद नहीं है।"
+  },
+  "languages": {
+    "en": "English",
+    "hi": "हिंदी",
+    "es": "Español",
+    "fr": "Français",
+    "ta": "தமிழ்",
+    "te": "తెలుగు",
+    "kn": "ಕನ್ನಡ"
+  }
+}

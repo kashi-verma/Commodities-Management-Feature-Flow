@@ -1,0 +1,81 @@
+
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "add": "Ajouter",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "goBack": "Retour",
+    "logout": "Déconnexion",
+    "light": "Clair",
+    "dark": "Sombre"
+  },
+  "auth": {
+    "login": "Se connecter",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "loginTitle": "Slooze Commodities",
+    "loginSubtitle": "Connectez-vous à votre compte pour continuer",
+    "signingIn": "Connexion en cours...",
+    "welcomeBack": "Bon retour !",
+    "loginSuccess": "Vous vous êtes connecté avec succès.",
+    "invalidCredentials": "E-mail ou mot de passe invalide. Veuillez réessayer.",
+    "loginError": "Une erreur s'est produite lors de la connexion. Veuillez réessayer.",
+    "demoCredentials": "Identifiants de démonstration :",
+    "manager": "Gestionnaire : manager@slooze.com",
+    "storekeeper": "Magasinier : keeper@slooze.com",
+    "demoPassword": "Mot de passe : password123"
+  },
+  "navigation": {
+    "dashboard": "Tableau de bord",
+    "products": "Produits",
+    "application": "Application"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "subtitle": "Aperçu de votre système de gestion des matières premières"
+  },
+  "products": {
+    "title": "Produits",
+    "subtitle": "Gérez votre inventaire de matières premières et vos prix",
+    "addProduct": "Ajouter un produit",
+    "searchProducts": "Rechercher des produits...",
+    "all": "Tous",
+    "grains": "Céréales",
+    "metals": "Métaux",
+    "energy": "Énergie",
+    "livestock": "Bétail",
+    "quantity": "Quantité",
+    "price": "Prix",
+    "priceChange": "Changement de prix :",
+    "lastUpdated": "Dernière mise à jour :",
+    "inStock": "en stock",
+    "lowStock": "stock faible",
+    "outOfStock": "rupture de stock",
+    "noProductsFound": "Aucun produit trouvé",
+    "noProductsMessage": "Essayez d'ajuster vos critères de recherche ou de filtre"
+  },
+  "unauthorized": {
+    "title": "Accès refusé",
+    "message": "Vous n'avez pas la permission d'accéder à cette page. Veuillez contacter votre administrateur si vous pensez qu'il s'agit d'une erreur."
+  },
+  "notFound": {
+    "title": "Page non trouvée",
+    "message": "La page que vous recherchez n'existe pas."
+  },
+  "languages": {
+    "en": "English",
+    "hi": "हिंदी",
+    "es": "Español",
+    "fr": "Français",
+    "ta": "தமிழ்",
+    "te": "తెలుగు",
+    "kn": "ಕನ್ನಡ"
+  }
+}

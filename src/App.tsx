@@ -13,6 +13,7 @@ import Dashboard from "./pages/Dashboard";
 import Products from "./pages/Products";
 import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
+import './i18n'; // Initialize i18n
 
 const queryClient = new QueryClient();
 

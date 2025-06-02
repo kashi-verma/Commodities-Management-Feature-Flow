@@ -1,9 +1,11 @@
 
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
 import { Button } from '@/components/ui/button';
+import LanguageSwitcher from './LanguageSwitcher';
 import { 
   BarChart3, 
   Package, 
@@ -23,6 +25,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
+  const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -34,13 +37,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   const navigationItems = [
     {
-      name: 'Dashboard',
+      name: t('navigation.dashboard'),
       href: '/',
       icon: BarChart3,
       allowedRoles: ['manager']
     },
     {
-      name: 'Products',
+      name: t('navigation.products'),
       href: '/products',
       icon: Package,
       allowedRoles: ['manager', 'storekeeper']
@@ -63,7 +66,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <Package className="h-5 w-5 text-white" />
               </div>
               <h1 className="text-xl font-bold text-gray-900 dark:text-white">
-                Slooze Commodities
+                {t('auth.loginTitle')}
               </h1>
             </div>
 
@@ -91,12 +94,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
             {/* User Actions */}
             <div className="flex items-center space-x-3">
+              {/* Language Switcher */}
+              <LanguageSwitcher />
+
               {/* Theme Toggle */}
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={toggleTheme}
                 className="p-2"
+                title={theme === 'light' ? t('common.dark') : t('common.light')}
               >
                 {theme === 'light' ? (
                   <Moon className="h-4 w-4" />
@@ -123,6 +130,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 size="sm"
                 onClick={handleLogout}
                 className="p-2 text-gray-600 hover:text-red-600 dark:text-gray-300 dark:hover:text-red-400"
+                title={t('common.logout')}
               >
                 <LogOut className="h-4 w-4" />
               </Button>

@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,10 +10,12 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, Package } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
 const Login: React.FC = () => {
   const { user, login } = useAuth();
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -31,14 +34,14 @@ const Login: React.FC = () => {
       const success = await login(email, password);
       if (success) {
         toast({
-          title: "Welcome back!",
-          description: "You have successfully logged in.",
+          title: t('auth.welcomeBack'),
+          description: t('auth.loginSuccess'),
         });
       } else {
-        setError('Invalid email or password. Please try again.');
+        setError(t('auth.invalidCredentials'));
       }
     } catch (err) {
-      setError('An error occurred during login. Please try again.');
+      setError(t('auth.loginError'));
     } finally {
       setIsLoading(false);
     }
@@ -46,6 +49,11 @@ const Login: React.FC = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-4">
+      {/* Language Switcher in top right */}
+      <div className="absolute top-4 right-4">
+        <LanguageSwitcher />
+      </div>
+      
       <Card className="w-full max-w-md shadow-xl">
         <CardHeader className="text-center space-y-4">
           <div className="mx-auto w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
@@ -53,10 +61,10 @@ const Login: React.FC = () => {
           </div>
           <div>
             <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
-              Slooze Commodities
+              {t('auth.loginTitle')}
             </CardTitle>
             <CardDescription className="text-gray-600 dark:text-gray-400">
-              Sign in to your account to continue
+              {t('auth.loginSubtitle')}
             </CardDescription>
           </div>
         </CardHeader>
@@ -70,11 +78,11 @@ const Login: React.FC = () => {
             )}
             
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t('auth.email')}</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="Enter your email"
+                placeholder={t('auth.email')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -83,11 +91,11 @@ const Login: React.FC = () => {
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">{t('auth.password')}</Label>
               <Input
                 id="password"
                 type="password"
-                placeholder="Enter your password"
+                placeholder={t('auth.password')}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -96,10 +104,10 @@ const Login: React.FC = () => {
             </div>
             
             <div className="text-sm text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
-              <strong>Demo Credentials:</strong><br />
-              Manager: manager@slooze.com<br />
-              Store Keeper: keeper@slooze.com<br />
-              Password: password123
+              <strong>{t('auth.demoCredentials')}</strong><br />
+              {t('auth.manager')}<br />
+              {t('auth.storekeeper')}<br />
+              {t('auth.demoPassword')}
             </div>
           </CardContent>
           
@@ -112,10 +120,10 @@ const Login: React.FC = () => {
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Signing in...
+                  {t('auth.signingIn')}
                 </>
               ) : (
-                'Sign in'
+                t('auth.login')
               )}
             </Button>
           </CardFooter>

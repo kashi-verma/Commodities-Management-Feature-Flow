@@ -1,0 +1,81 @@
+
+{
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "add": "Agregar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "goBack": "Volver",
+    "logout": "Cerrar sesión",
+    "light": "Claro",
+    "dark": "Oscuro"
+  },
+  "auth": {
+    "login": "Iniciar sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "loginTitle": "Slooze Commodities",
+    "loginSubtitle": "Inicia sesión en tu cuenta para continuar",
+    "signingIn": "Iniciando sesión...",
+    "welcomeBack": "¡Bienvenido de nuevo!",
+    "loginSuccess": "Has iniciado sesión exitosamente.",
+    "invalidCredentials": "Correo o contraseña inválidos. Por favor intenta de nuevo.",
+    "loginError": "Ocurrió un error durante el inicio de sesión. Por favor intenta de nuevo.",
+    "demoCredentials": "Credenciales de demostración:",
+    "manager": "Gerente: manager@slooze.com",
+    "storekeeper": "Almacenista: keeper@slooze.com",
+    "demoPassword": "Contraseña: password123"
+  },
+  "navigation": {
+    "dashboard": "Panel",
+    "products": "Productos",
+    "application": "Aplicación"
+  },
+  "dashboard": {
+    "title": "Panel",
+    "subtitle": "Resumen de tu sistema de gestión de materias primas"
+  },
+  "products": {
+    "title": "Productos",
+    "subtitle": "Gestiona tu inventario de materias primas y precios",
+    "addProduct": "Agregar Producto",
+    "searchProducts": "Buscar productos...",
+    "all": "Todos",
+    "grains": "Granos",
+    "metals": "Metales",
+    "energy": "Energía",
+    "livestock": "Ganado",
+    "quantity": "Cantidad",
+    "price": "Precio",
+    "priceChange": "Cambio de precio:",
+    "lastUpdated": "Última actualización:",
+    "inStock": "en stock",
+    "lowStock": "stock bajo",
+    "outOfStock": "sin stock",
+    "noProductsFound": "No se encontraron productos",
+    "noProductsMessage": "Intenta ajustar tus criterios de búsqueda o filtro"
+  },
+  "unauthorized": {
+    "title": "Acceso Denegado",
+    "message": "No tienes permiso para acceder a esta página. Por favor contacta a tu administrador si crees que esto es un error."
+  },
+  "notFound": {
+    "title": "Página No Encontrada",
+    "message": "La página que buscas no existe."
+  },
+  "languages": {
+    "en": "English",
+    "hi": "हिंदी",
+    "es": "Español",
+    "fr": "Français",
+    "ta": "தமிழ்",
+    "te": "తెలుగు",
+    "kn": "ಕನ್ನಡ"
+  }
+}

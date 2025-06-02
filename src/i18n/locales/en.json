@@ -1,0 +1,81 @@
+
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "goBack": "Go Back",
+    "logout": "Logout",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "auth": {
+    "login": "Sign in",
+    "email": "Email",
+    "password": "Password",
+    "loginTitle": "Slooze Commodities",
+    "loginSubtitle": "Sign in to your account to continue",
+    "signingIn": "Signing in...",
+    "welcomeBack": "Welcome back!",
+    "loginSuccess": "You have successfully logged in.",
+    "invalidCredentials": "Invalid email or password. Please try again.",
+    "loginError": "An error occurred during login. Please try again.",
+    "demoCredentials": "Demo Credentials:",
+    "manager": "Manager: manager@slooze.com",
+    "storekeeper": "Store Keeper: keeper@slooze.com",
+    "demoPassword": "Password: password123"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "products": "Products",
+    "application": "Application"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Overview of your commodities management system"
+  },
+  "products": {
+    "title": "Products",
+    "subtitle": "Manage your commodity inventory and pricing",
+    "addProduct": "Add Product",
+    "searchProducts": "Search products...",
+    "all": "All",
+    "grains": "Grains",
+    "metals": "Metals",
+    "energy": "Energy",
+    "livestock": "Livestock",
+    "quantity": "Quantity",
+    "price": "Price",
+    "priceChange": "Price change:",
+    "lastUpdated": "Last updated:",
+    "inStock": "in stock",
+    "lowStock": "low stock",
+    "outOfStock": "out of stock",
+    "noProductsFound": "No products found",
+    "noProductsMessage": "Try adjusting your search or filter criteria"
+  },
+  "unauthorized": {
+    "title": "Access Denied",
+    "message": "You don't have permission to access this page. Please contact your administrator if you believe this is an error."
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "message": "The page you are looking for does not exist."
+  },
+  "languages": {
+    "en": "English",
+    "hi": "हिंदी",
+    "es": "Español",
+    "fr": "Français",
+    "ta": "தமிழ்",
+    "te": "తెలుగు",
+    "kn": "ಕನ್ನಡ"
+  }
+}
