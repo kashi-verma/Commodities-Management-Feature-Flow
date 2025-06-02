@@ -47,6 +47,7 @@ const Products: React.FC = () => {
   const [viewMode, setViewMode] = useState<'card' | 'table'>('card');
 
   // Mock products data
+  // Added the table Format
   const [products] = useState<Product[]>([
     {
       id: '1',
